@@ -1,4 +1,4 @@
-package com.ikempf.mower
+package com.ikempf.mower.domain.model
 
 sealed trait Command
 
