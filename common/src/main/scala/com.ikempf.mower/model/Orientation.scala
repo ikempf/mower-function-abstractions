@@ -1,4 +1,4 @@
-package com.ikempf.mower.domain.model
+package com.ikempf.mower.model
 
 sealed trait Orientation
 
@@ -10,7 +10,6 @@ object Orientation {
 
   val orientationsCircle: List[Orientation] = List(North, East, South, West)
 
-  // TODO: Not safe !
   def relativeRight(orientation: Orientation): Orientation =
     orientationsCircle.apply((orientationsCircle.indexOf(orientation) + 1) % 4)
 
