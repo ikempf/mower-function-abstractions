@@ -1,13 +1,24 @@
 package com.ikempf.mower
 
-sealed trait Program
+import cats.{Id, ~>}
+import com.ikempf.mower.Program.{Nothing, WriteLn}
 
-case class PrintLn(line: String)
 
 object Main extends App {
 
+  val program = JobRunner.runAll(TestData.size, TestData.job)
 
-  JobRunner.runAll(TestData.job)
+  program.foldMap(impureCompiler)
+
+  def impureCompiler: Program ~> Id  =
+    new (Program ~> Id) {
+      def apply[A](fa: Program[A]): Id[A] =
+        fa match {
+          case WriteLn(line) =>
+            println(line)
+            ()
+        }
+    }
 
 
 }

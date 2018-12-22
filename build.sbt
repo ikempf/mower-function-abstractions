@@ -26,4 +26,7 @@ lazy val `final-tagless` = (project in file("final-tagless"))
 
 lazy val `free-monad` = (project in file("free-monad"))
   .settings(commonSettings)
+  .settings(
+    libraryDependencies += "org.typelevel" %% "cats-free" % "1.5.0"
+  )
   .dependsOn(`common`)
